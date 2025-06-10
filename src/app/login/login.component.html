@@ -1,0 +1,48 @@
+<div class="container" id="container">
+  <!-- Sign Up Form -->
+  <div class="form-container sign-up-container">
+    <form #f="ngForm">
+      <h1>Create Account</h1>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Sign Up</button>
+    </form>
+  </div>
+
+  <!-- Sign In Form -->
+  <div class="form-container sign-in-container">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <input type="email" class="form-control" id="email" required placeholder="Enter email" name="email" ngModel email
+        #emailInput="ngModel">
+
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="text-danger small mt-1">
+        <div *ngIf="emailInput.hasError('required')">Field must not be empty</div>
+        <div *ngIf="!emailInput.hasError('required')">Email is invalid</div>
+      </div>
+      <input type="password" class="form-control" id="password" required minlength="6" placeholder="Enter password"
+        name="password" ngModel #pwInput="ngModel" />
+      <div class="form-text text-end">{{ pwInput.value?.length || 0 }} / 6</div>
+      <div *ngIf="pwInput.invalid && pwInput.touched" class="text-danger small mt-1">
+        Has to be at least 6 characters long.
+      </div>
+      <button type="submit" [disabled]="f.invalid">Sign In</button>
+    </form>
+  </div>
+
+  <!-- Overlay Panels -->
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start your journey with us</p>
+        <button class="ghost" id="signUp">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
